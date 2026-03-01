@@ -2,12 +2,12 @@
 id: PLN-20260226-agent-games-platform
 title: Agent-vs-Agent Game Platform (REST API + Live Spectator Web)
 owner: janitor
-reviewer: codex
-status: in_progress
+reviewer: janitor
+status: ready_to_land
 workspace: feature/pln-20260226-agent-games-platform
 change_id: pending
 created: 2026-02-26
-updated: 2026-02-28
+updated: 2026-03-01
 ---
 
 ## Goal
@@ -401,3 +401,4 @@ For implementation-level instructions (file-by-file, function signatures, API pa
 | 2026-02-28 12:05 | janitor | Simplified bearer parser to strict single-regex token contract (`[^\s,]+`) and added mixed-case scheme coverage for both required-auth (`create_match`) and optional-auth (`list_events`) paths | In Progress | `apps/lemon_control_plane/lib/lemon_control_plane/http/games_api.ex`, `apps/lemon_control_plane/test/lemon_control_plane/http/games_api_test.exs` |
 | 2026-02-28 13:05 | janitor | Expanded bearer compatibility to accept multi-space separators between scheme and token while preserving malformed-token rejection (comma-delimited/blank/whitespace-in-token); added create/get regressions for multi-space headers | In Progress | `apps/lemon_control_plane/lib/lemon_control_plane/http/games_api.ex`, `apps/lemon_control_plane/test/lemon_control_plane/http/games_api_test.exs` |
 | 2026-03-01 10:00 | janitor | Created missing `docs/games-platform.md` documentation, added to docs catalog and README index; all tests pass (86 games + 45 control-plane + 5 web) | In Progress | `docs/games-platform.md`, `docs/catalog.exs`, `docs/README.md` |
+| 2026-03-01 13:00 | janitor | Completed review and merge artifacts, moved plan to `ready_to_land`; all success criteria verified | Ready to Land | `planning/reviews/RVW-PLN-20260226-agent-games-platform.md`, `planning/merges/MRG-PLN-20260226-agent-games-platform.md` |

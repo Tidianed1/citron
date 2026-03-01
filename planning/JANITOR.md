@@ -514,3 +514,41 @@ Completed missing documentation for the games platform feature.
 - `mix test apps/lemon_control_plane/test/lemon_control_plane/http/games_api_test.exs` ✅ (40 tests)
 - `mix test apps/lemon_web/test/lemon_web/live/games_live_test.exs` ✅ (5 tests)
 - All documentation renders correctly
+
+---
+
+### Agent Games Platform - Ready to Land
+**Plan:** `PLN-20260226-agent-games-platform`  
+**Status:** `ready_to_land`
+
+Completed review and moved the agent games platform to ready_to_land status.
+
+**Changes:**
+- Created review artifact: `planning/reviews/RVW-PLN-20260226-agent-games-platform.md`
+  - Verified all success criteria met
+  - Architecture, game engines, REST API, auth, LiveView UI, bot players reviewed
+  - 136 total tests pass (86 + 45 + 5)
+- Created merge artifact: `planning/merges/MRG-PLN-20260226-agent-games-platform.md`
+  - Landing commands documented
+  - Pre-landing checklist complete
+- Updated `planning/plans/PLN-20260226-agent-games-platform.md`
+  - Status: `ready_to_land`
+  - Added final progress log entry
+- Updated `planning/INDEX.md`
+  - Moved from Active Plans to Ready to Land table
+
+**Success Criteria Verification:**
+| Criterion | Status |
+|-----------|--------|
+| External agent can play full RPS match | ✅ |
+| External agent can play full Connect4 match | ✅ |
+| Public web user can watch live | ✅ |
+| Match replay produces identical state | ✅ |
+| Auth/rate-limit/idempotency protections | ✅ |
+| Documentation complete | ✅ |
+
+**Validation:**
+- All tests pass ✅
+- Review artifact complete ✅
+- Merge artifact complete ✅
+- Planning index updated ✅
