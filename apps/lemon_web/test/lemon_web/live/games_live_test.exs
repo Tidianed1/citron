@@ -28,7 +28,7 @@ defmodule LemonWeb.Live.GamesLiveTest do
 
   test "lobby updates when lobby event is received" do
     {:ok, view, html} = live(build_conn(), "/games")
-    assert html =~ "No matches yet"
+    assert html =~ "No active matches"
 
     {:ok, match} =
       Service.create_match(%{"game_type" => "connect4", "visibility" => "public"}, @actor1)
@@ -36,7 +36,7 @@ defmodule LemonWeb.Live.GamesLiveTest do
     send(view.pid, Event.new(:game_lobby_changed, %{}))
 
     assert render(view) =~ match["id"]
-    assert render(view) =~ "connect4"
+    assert render(view) =~ "Connect 4"
   end
 
   test "GET /games/:match_id renders match details" do
@@ -45,23 +45,25 @@ defmodule LemonWeb.Live.GamesLiveTest do
     conn = get(build_conn(), "/games/#{match_id}")
     html = html_response(conn, 200)
 
-    assert html =~ "Game Match"
-    assert html =~ match_id
-    assert html =~ "connect4"
+    # Check that the match page renders with key elements
+    assert html =~ "Turn #1"
+    assert html =~ "connect4-board"
+    assert html =~ "Back to lobby"
+    assert html =~ "VS"
   end
 
   test "match live updates after game event" do
     {:ok, match_id} = create_active_match()
     {:ok, view, html} = live(build_conn(), "/games/#{match_id}")
 
-    assert html =~ "Turn:</span> #1"
+    assert html =~ "Turn #1"
 
     assert {:ok, _updated, _seq, false} =
              Service.submit_move(match_id, @actor1, %{"kind" => "drop", "column" => 0}, "lv-move-1")
 
     send(view.pid, Event.new(:game_match_event, %{}))
 
-    assert render(view) =~ "Turn:</span> #2"
+    assert render(view) =~ "Turn #2"
   end
 
   test "unknown match shows not found message" do
