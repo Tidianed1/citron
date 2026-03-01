@@ -67,3 +67,27 @@
 - `IDEA-20260225-oh-my-pi-changelog-schema-hardening`
 - `IDEA-20260225-community-episodic-git-verified-handoffs`
 - `IDEA-20260225-community-autonomous-agent-consent-scopes`
+
+## 2026-02-28 Research Snapshot
+
+### Upstream repo deltas reviewed
+- **oh-my-pi**: No new commits since 2026-02-23 (already captured: strict mode fixes, hashline edit operations, todo phase management, tool schema refactoring)
+- **pi**: No new commits since 2026-02-23 (already captured: incremental highlight for streaming, extension theme persistence)
+- **openclaw**: No new commits since 2026-02-22 (already captured: cron jobId hardening, markup sanitization, config redaction, Mistral support)
+- **ironclaw**: No new commits since 2026-02-23 (already captured: shell completion, context compaction, Telegram improvements)
+
+### Community/trend signals
+- **MCP (Model Context Protocol)** is now officially an industry standard - OpenAI adopted it in March 2025 across products including ChatGPT desktop app
+- **WASM sandboxing for AI agents** is gaining major traction - Microsoft released Wassette (WebAssembly-based tools for AI agents), NVIDIA published sandboxing guidance
+- **Self-hosted AI coding agents** remain a strong community demand - users want local LLM support without external API dependencies
+- **Multi-channel AI agents** (Discord, Telegram, Slack) are table stakes - OpenClaw's success driven by broad channel support
+- **AI agent comparison content** shows OpenClaw vs Claude Code as the key comparison - OpenClaw wins on proactive automation/Heartbeat and local control; Claude Code wins on strict self-correction loops
+
+### Research findings
+All upstream deltas from Feb 22-23 have been previously captured. No new idea artifacts required for this run.
+
+### Strategic confirmations
+1. **MCP integration** remains high priority - industry standard now with OpenAI adoption
+2. **WASM sandbox enhancements** align with Microsoft/NVIDIA industry direction
+3. **Discord adapter** would capture OpenClaw-style community use cases
+4. **Local/offline deployment** patterns need continued investment
