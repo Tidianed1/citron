@@ -11,11 +11,11 @@ defmodule LemonWeb.Games.Components.BoardComponent do
     assigns = assign(assigns, :rows, rows)
 
     ~H"""
-    <div id="connect4-board" class="inline-block rounded-lg border border-slate-200 bg-slate-50 p-2">
-      <%= for row <- @rows do %>
+    <div id="connect4-board" class="inline-block rounded-xl border-4 border-blue-600 bg-blue-500 p-2 shadow-lg">
+      <%= for {row, row_idx} <- Enum.with_index(@rows) do %>
         <div class="flex gap-1">
-          <%= for cell <- row do %>
-            <span class={cell_class(cell)} />
+          <%= for {cell, col_idx} <- Enum.with_index(row) do %>
+            <span class={connect4_cell_class(cell)} style={"animation-delay: #{row_idx * 50 + col_idx * 30}ms"} />
           <% end %>
         </div>
       <% end %>
@@ -35,11 +35,10 @@ defmodule LemonWeb.Games.Components.BoardComponent do
       |> assign(:winner, winner)
 
     ~H"""
-    <div id="rps-board" class="space-y-1 text-sm">
-      <p>p1 throw: {Map.get(@throws, "p1", "?")}</p>
-      <p>p2 throw: {Map.get(@throws, "p2", "?")}</p>
-      <p>resolved: {to_string(@resolved)}</p>
-      <p>winner: {@winner || "—"}</p>
+    <div id="rps-board" class="flex items-center gap-6 rounded-xl bg-slate-50 p-6">
+      <.rps_throw player="p1" throw={Map.get(@throws, "p1")} />
+      <div class="text-2xl font-black text-slate-300">VS</div>
+      <.rps_throw player="p2" throw={Map.get(@throws, "p2")} />
     </div>
     """
   end
@@ -49,7 +48,7 @@ defmodule LemonWeb.Games.Components.BoardComponent do
     assigns = assign(assigns, :rows, rows)
 
     ~H"""
-    <div id="tic-tac-toe-board" class="inline-block rounded-lg border border-slate-200 bg-slate-50 p-2">
+    <div id="tic-tac-toe-board" class="inline-block rounded-xl bg-slate-800 p-2 shadow-lg">
       <%= for row <- @rows do %>
         <div class="flex gap-1">
           <%= for cell <- row do %>
@@ -69,16 +68,38 @@ defmodule LemonWeb.Games.Components.BoardComponent do
     """
   end
 
-  defp cell_class(0), do: "block h-6 w-6 rounded-full bg-slate-200"
-  defp cell_class(1), do: "block h-6 w-6 rounded-full bg-red-500"
-  defp cell_class(2), do: "block h-6 w-6 rounded-full bg-yellow-400"
-  defp cell_class(_), do: "block h-6 w-6 rounded-full bg-slate-400"
+  def rps_throw(assigns) do
+    icon = case @throw do
+      "rock" -> "✊"
+      "paper" -> "✋"
+      "scissors" -> "✌️"
+      _ -> "❓"
+    end
 
-  defp tictactoe_cell_class(nil), do: "flex h-12 w-12 items-center justify-center rounded bg-white text-lg font-bold text-slate-300"
-  defp tictactoe_cell_class("X"), do: "flex h-12 w-12 items-center justify-center rounded bg-blue-100 text-lg font-bold text-blue-600"
-  defp tictactoe_cell_class("O"), do: "flex h-12 w-12 items-center justify-center rounded bg-rose-100 text-lg font-bold text-rose-600"
-  defp tictactoe_cell_class(_), do: "flex h-12 w-12 items-center justify-center rounded bg-slate-200 text-lg font-bold"
+    color = case @throw do
+      nil -> "bg-slate-200 text-slate-400"
+      _ -> "bg-white text-slate-900 shadow-md"
+    end
 
-  defp tictactoe_cell_content(nil), do: "·"
+    assigns = assign(assigns, icon: icon, color: color)
+
+    ~H"""
+    <div class={["flex h-20 w-20 items-center justify-center rounded-full text-4xl transition-all", @color]}>
+      {@icon}
+    </div>
+    """
+  end
+
+  defp connect4_cell_class(0), do: "block h-10 w-10 rounded-full bg-slate-200 shadow-inner"
+  defp connect4_cell_class(1), do: "block h-10 w-10 rounded-full bg-red-500 shadow-md"
+  defp connect4_cell_class(2), do: "block h-10 w-10 rounded-full bg-yellow-400 shadow-md"
+  defp connect4_cell_class(_), do: "block h-10 w-10 rounded-full bg-slate-400"
+
+  defp tictactoe_cell_class(nil), do: "flex h-16 w-16 items-center justify-center rounded-lg bg-slate-700 text-2xl font-bold text-slate-600 transition-all hover:bg-slate-600"
+  defp tictactoe_cell_class("X"), do: "flex h-16 w-16 items-center justify-center rounded-lg bg-slate-700 text-2xl font-bold text-blue-400 shadow-lg"
+  defp tictactoe_cell_class("O"), do: "flex h-16 w-16 items-center justify-center rounded-lg bg-slate-700 text-2xl font-bold text-rose-400 shadow-lg"
+  defp tictactoe_cell_class(_), do: "flex h-16 w-16 items-center justify-center rounded-lg bg-slate-700 text-2xl font-bold"
+
+  defp tictactoe_cell_content(nil), do: ""
   defp tictactoe_cell_content(cell), do: cell
 end

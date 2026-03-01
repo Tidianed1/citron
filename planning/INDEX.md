@@ -38,6 +38,7 @@ These entries were already completed before the `planning/` workflow was created
 
 | Plan ID | Title | Review Doc | Owner | Updated |
 |---|---|---|---|---|
+| [PLN-20260301-mcp-tool-integration](plans/PLN-20260301-mcp-tool-integration.md) | MCP Tool Integration | [RVW-PLN-20260301-mcp-tool-integration.md](reviews/RVW-PLN-20260301-mcp-tool-integration.md) | janitor | 2026-03-01 |
 
 ## Ready to Land
 
