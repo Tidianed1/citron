@@ -4,38 +4,6 @@ defmodule LemonMCP.ClientTest do
   alias LemonMCP.Client
   alias LemonMCP.Protocol
 
-  # Mock transport for testing without spawning real processes
-  defmodule MockTransport do
-    use GenServer
-
-    def start_link(opts) do
-      GenServer.start_link(__MODULE__, opts)
-    end
-
-    def init(opts) do
-      parent = Keyword.fetch!(opts, :parent)
-      test_case = Keyword.fetch!(opts, :test_case)
-      {:ok, %{parent: parent, test_case: test_case, message_handler: nil}}
-    end
-
-    def send_message(pid, message) do
-      GenServer.call(pid, {:send, message})
-    end
-
-    def close(pid) do
-      GenServer.call(pid, :close)
-    end
-
-    def handle_call({:send, message}, _from, %{test_case: test_case} = state) do
-      send(state.parent, {:transport_message, test_case, message})
-      {:reply, :ok, state}
-    end
-
-    def handle_call(:close, _from, state) do
-      {:reply, :ok, %{state | message_handler: nil}}
-    end
-  end
-
   describe "protocol operations" do
     test "initialize_request creates valid request" do
       request =

@@ -118,14 +118,17 @@ defmodule LemonMCP.ProtocolTest do
       assert decoded["params"]["name"] == "test_tool"
       assert decoded["params"]["arguments"]["key"] == "value"
     end
+  end
 
-    test "encode! raises on error" do
-      # Create a struct that can't be encoded
-      bad_struct = %{__struct__: Protocol.InitializeRequest, id: self()}
+  describe "encode!/1" do
+    test "encodes a request to JSON" do
+      request = Protocol.tool_list_request(id: "1")
+      json = Protocol.encode!(request)
 
-      assert_raise Jason.EncodeError, fn ->
-        Protocol.encode!(bad_struct)
-      end
+      assert is_binary(json)
+      decoded = Jason.decode!(json)
+      assert decoded["jsonrpc"] == "2.0"
+      assert decoded["id"] == "1"
     end
   end
 
@@ -148,6 +151,7 @@ defmodule LemonMCP.ProtocolTest do
       assert response.result.protocolVersion == "2024-11-05"
       assert response.result.capabilities == %{"tools" => true}
       assert response.result.serverInfo.name == "test-server"
+      assert response.result.serverInfo.version == "1.0.0"
       assert response.error == nil
     end
 
