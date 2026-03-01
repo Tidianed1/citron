@@ -34,4 +34,9 @@ defmodule LemonWeb.Router do
     live "/:match_id", MatchLive, :show
   end
 
+  # Health check endpoint for Fly.io
+  scope "/", LemonWeb do
+    get "/healthz", HealthController, :index
+  end
+
 end
