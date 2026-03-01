@@ -20,6 +20,7 @@ This folder is the canonical navigation map for Lemon runtime and harness behavi
 ## Product & Capability Docs
 
 - [`docs/skills.md`](skills.md)
+- [`docs/games-platform.md`](games-platform.md) - Agent-vs-Agent game platform (REST API + LiveView spectator)
 - [`docs/benchmarks.md`](benchmarks.md)
 - [`docs/tools/web.md`](tools/web.md)
 - [`docs/tools/firecrawl.md`](tools/firecrawl.md)
