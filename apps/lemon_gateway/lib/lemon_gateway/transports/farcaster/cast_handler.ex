@@ -8,6 +8,8 @@ defmodule LemonGateway.Transports.Farcaster.CastHandler do
   require Logger
 
   alias LemonGateway.{BindingResolver, Runtime}
+  alias LemonCore.{Store, Secrets}
+  alias LemonGateway.Transports.Farcaster.HubClient
   alias LemonCore.Store
   alias LemonGateway.Transports.Farcaster.HubClient
   alias LemonCore.ChatScope
@@ -556,41 +558,45 @@ defmodule LemonGateway.Transports.Farcaster.CastHandler do
 
   defp session_signature(session_ref, fid)
        when is_binary(session_ref) and is_integer(fid) and fid > 0 do
-    case state_secret() do
-      secret when is_binary(secret) ->
-        :crypto.mac(:hmac, :sha256, secret, "#{fid}:#{session_ref}")
-        |> Base.url_encode64(padding: false)
+    try do
+      case state_secret() do
+        secret when is_binary(secret) ->
+          :crypto.mac(:hmac, :sha256, secret, "#{fid}:#{session_ref}")
+          |> Base.url_encode64(padding: false)
 
-      _ ->
-        nil
+        _ ->
+          nil
+      end
+    rescue
+      _ -> nil
     end
-  rescue
-    _ -> nil
   end
 
   defp session_signature(_, _), do: nil
 
   defp farcaster_account_id do
     normalize_blank(config()[:account_id]) ||
-      normalize_blank(System.get_env("FARCASTER_ACCOUNT_ID")) ||
+      normalize_blank(Secrets.fetch_value("FARCASTER_ACCOUNT_ID")) ||
       @default_account_id
   end
 
   defp state_secret do
     normalize_blank(config()[:state_secret]) ||
-      normalize_blank(System.get_env("FARCASTER_STATE_SECRET")) ||
-      normalize_blank(System.get_env("LEMON_STATE_SECRET")) ||
+      normalize_blank(Secrets.fetch_value("FARCASTER_STATE_SECRET")) ||
+      normalize_blank(Secrets.fetch_value("LEMON_STATE_SECRET")) ||
       fallback_state_secret()
   end
 
   defp fallback_state_secret do
-    cookie = :erlang.get_cookie() |> to_string()
-    node_name = node() |> to_string()
+    try do
+      cookie = :erlang.get_cookie() |> to_string()
+      node_name = node() |> to_string()
 
-    :crypto.hash(:sha256, "farcaster-state:" <> cookie <> ":" <> node_name)
-    |> Base.url_encode64(padding: false)
-  rescue
-    _ -> "farcaster-state-fallback"
+      :crypto.hash(:sha256, "farcaster-state:" <> cookie <> ":" <> node_name)
+      |> Base.url_encode64(padding: false)
+    rescue
+      _ -> "farcaster-state-fallback"
+    end
   end
 
   defp truncate_state_prompt(nil), do: nil

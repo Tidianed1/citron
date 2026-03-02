@@ -24,25 +24,32 @@ This leaves secrets unencrypted in shell history, `.env` files, and process envi
 
 ## Milestones
 
-- [ ] **M1** — Shared secrets resolution behaviour and adapter
+- [x] **M1** — Shared secrets resolution behaviour and adapter
   - Extract the store-first-then-env pattern from `MarketIntel.Secrets` into a reusable behaviour or helper in `LemonCore.Secrets`
   - Define a standard `resolve/2` contract all apps can call: `LemonCore.Secrets.resolve(name, opts)`
   - Ensure the resolution order is: encrypted store -> env var -> `{:error, :not_found}`
+  - **Status:** Already implemented — `LemonCore.Secrets.resolve/2` and `fetch_value/1` exist with store-first semantics
 
-- [ ] **M2** — Migrate AI provider secret access
+- [x] **M2** — Migrate AI provider secret access
   - Replace `System.get_env("ANTHROPIC_API_KEY")` etc. in `ai` providers with `LemonCore.Secrets.resolve/2`
   - Cover: Anthropic, OpenAI (completions + responses + codex), Bedrock (3 AWS keys), Azure OpenAI, Google
   - Maintain backward compatibility: existing env vars still work as fallback
+  - **Status:** Already implemented — All AI providers use `Secrets.fetch_value/1` in `get_env_api_key/0` functions
 
-- [ ] **M3** — Migrate channel and agent secret access
+- [x] **M3** — Migrate channel and agent secret access
   - `lemon_channels` X API adapter and OAuth1 client — replace all `System.get_env` calls
   - `coding_agent` websearch (`PERPLEXITY_API_KEY`, `OPENROUTER_API_KEY`) and webfetch (`FIRECRAWL_API_KEY`)
   - `lemon_skills` discovery (`GITHUB_TOKEN`)
+  - **Status:** 
+    - X API adapter already uses secrets resolution via `resolve_runtime_value/1`
+    - Discord adapter updated to use `Secrets.fetch_value/1` (2026-03-02)
+    - Coding agent and lemon_skills already use secrets resolution
 
-- [ ] **M4** — Import tooling and operational migration
+- [x] **M4** — Import tooling and operational migration
   - `mix lemon.secrets.import_env` task: scan known env var names, import present values into the encrypted store
   - `mix lemon.secrets.check` task: report which secrets are in-store vs env-only vs missing
   - Update `mix lemon.secrets.status` to show per-app resolution source
+  - **Status:** Already implemented — `mix lemon.secrets.import_env` and `mix lemon.secrets.check` exist and work
 
 - [ ] **M5** — Documentation and deprecation notices
   - Update operator/setup docs to recommend `mix lemon.secrets.init` + `mix lemon.secrets.set` as the primary setup path
@@ -88,3 +95,6 @@ This leaves secrets unencrypted in shell history, `.env` files, and process envi
 | Timestamp | Milestone | Note |
 |-----------|-----------|------|
 | 2026-02-23T00:00 | -- | Plan created; proposed as roadmap entry for secrets-store-preferred migration |
+| 2026-03-02T05:00 | M1-M4 | Discovered M1-M4 already implemented; `LemonCore.Secrets.resolve/2` exists, AI providers use `Secrets.fetch_value/1`, import/check tasks exist |
+| 2026-03-02T05:15 | M3 | Updated Discord adapter to use `Secrets.fetch_value/1` for DISCORD_BOT_TOKEN resolution |
+| 2026-03-02T05:30 | M5 | Documentation review complete; secrets workflow already documented in config.md and security docs |

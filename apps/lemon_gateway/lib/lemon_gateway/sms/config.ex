@@ -2,8 +2,10 @@ defmodule LemonGateway.Sms.Config do
   @moduledoc """
   Configuration reader for SMS webhook settings.
 
-  Reads values from environment variables (e.g. `LEMON_SMS_WEBHOOK_PORT`,
-  `TWILIO_AUTH_TOKEN`) with fallback to the application `:sms` config map.
+  Reads values from the encrypted secrets store (preferred) or environment
+  variables (e.g. `LEMON_SMS_WEBHOOK_PORT`, `TWILIO_AUTH_TOKEN`) with fallback
+  to the application `:sms` config map.
+
   Provides accessors for webhook port, bind IP, auth token, inbox number, and TTL.
   """
 
@@ -77,7 +79,8 @@ defmodule LemonGateway.Sms.Config do
   end
 
   def auth_token do
-    normalize_blank(System.get_env("TWILIO_AUTH_TOKEN")) || normalize_blank(sms_cfg(:auth_token))
+    normalize_blank(LemonCore.Secrets.fetch_value("TWILIO_AUTH_TOKEN")) ||
+      normalize_blank(sms_cfg(:auth_token))
   end
 
   def webhook_url_override do
