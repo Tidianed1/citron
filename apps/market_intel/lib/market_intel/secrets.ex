@@ -148,8 +148,11 @@ defmodule MarketIntel.Secrets do
       module = secrets_module()
       
       if is_atom(module) and Code.ensure_loaded?(module) and
-           function_exported?(module, :persist, 2) do
-        module.persist(name, value)
+           function_exported?(module, :set, 3) do
+        case module.set(name, value, provider: "market_intel") do
+          {:ok, _metadata} -> :ok
+          {:error, reason} -> {:error, reason}
+        end
       else
         {:error, :persist_module_not_loaded}
       end

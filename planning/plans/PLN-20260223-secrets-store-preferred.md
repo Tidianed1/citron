@@ -1,9 +1,11 @@
 # PLN-20260223: Encrypted Secrets Store as Preferred Secret Access Path
 
-**Status:** Proposed
-**Branch:** `feature/pln-20260223-secrets-store-preferred`
+**Status:** in_progress
+**Owner:** janitor
+**Branch:** `feature/pln-20260302-secrets-store-preferred`
 **Created:** 2026-02-23
-**Depends on:** [PLN-20260223-macos-keychain-secrets-audit](PLN-20260223-macos-keychain-secrets-audit.md)
+**Updated:** 2026-03-02
+**Depends on:** [PLN-20260223-macos-keychain-secrets-audit](PLN-20260223-macos-keychain-secrets-audit.md) (completed)
 
 ## Goal
 
@@ -88,3 +90,4 @@ This leaves secrets unencrypted in shell history, `.env` files, and process envi
 | Timestamp | Milestone | Note |
 |-----------|-----------|------|
 | 2026-02-23T00:00 | -- | Plan created; proposed as roadmap entry for secrets-store-preferred migration |
+| 2026-03-02T19:05 | M1/M2/M3 | Verified AI providers, lemon_channels, lemon_skills already use `Secrets.fetch_value`; fixed `MarketIntel.Secrets.put/2` bug (was calling non-existent `persist/2`, now correctly calls `set/3`) |
