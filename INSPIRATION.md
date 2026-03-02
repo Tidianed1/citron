@@ -1,72 +1,30 @@
 # INSPIRATION.md
 
-## 2026-02-24 Research Snapshot
+## 2026-03-02 Research Snapshot
 
 ### Upstream repo deltas reviewed
-- **oh-my-pi**: model picker role badge improvements (`1648b2ad0e42`)
-- **openclaw**: env-backed secret refs + plaintext avoidance for auth persistence (`18546f31e61f`, `121f204828cb`)
-- **ironclaw**: native Signal channel adapter via `signal-cli` HTTP daemon (`b0b3a50fa38d`)
-- **pi**: streaming + resolver updates reviewed; no net-new high-priority gap beyond already-tracked items
+- **oh-my-pi**: v13.1.1 released with local URL resolution fixes, job polling tool renamed to `await`, tool schema refactoring for consistency
+- **pi**: v0.54.2 released with skill auto-discovery in `.agents` paths by default (confirmed: **Lemon already has parity**)
+- **openclaw**: Full Mistral AI provider support added (commit d92ba4f8a), Synology Chat channel support, cron jobId hardening
+- **ironclaw**: v0.11.1 released with FullJob routine mode + scheduler dispatch, hot-activate WASM channels, channel-first prompts
 
 ### Community/trend signals
-- OpenClaw usage narratives continue emphasizing multi-channel reach and local-first control.
-- Azure/Microsoft architecture content reinforces multi-agent pattern maturity.
-- Community feedback highlights quota/limit interruptions during long coding sessions.
+- **Production readiness gap**: Industry analysis (VentureBeat, The New Stack) identifies critical blockers: brittle context windows, broken refactors, missing operational awareness (OS/environment), "agentic slop"
+- **Multi-agent orchestration**: OpenAI Agents SDK and community converging on structured output-based orchestration patterns (chaining, handoffs)
+- **OpenClaw vs Claude Code**: Community views them as complementary - OpenClaw = "Swiss Army knife" for proactive automation; Claude Code = "surgical scalpel" for strict self-correction
+- **AI coding agents not production-ready**: Users report lack of OS/machine awareness, environment detection (conda/venv), and context budget management
 
 ### New ideas added
-- `IDEA-20260224-openclaw-env-backed-secret-refs`
-- `IDEA-20260224-ironclaw-signal-channel-adapter`
-- `IDEA-20260224-oh-my-pi-model-role-badge`
-- `IDEA-20260224-community-quota-aware-agent-runs`
+1. `IDEA-20260302-ironclaw-fulljob-routine-mode` - Scheduled job execution with scheduler dispatch
+2. `IDEA-20260302-pi-skill-auto-discovery` - Skill auto-discovery parity confirmation (already implemented)
+3. `IDEA-20260302-openclaw-mistral-provider-support` - Mistral AI provider support evaluation
+4. `IDEA-20260302-community-ai-agent-production-readiness` - Address production deployment blockers
 
-## 2026-02-25 Research Snapshot
-
-### Upstream repo deltas reviewed
-- **ironclaw**: setup wizard now includes an OpenRouter preset with provider-specific labeling and prefilled base URL (`62dc5d046e28`)
-- **openclaw**: cron path/schema hardening around `jobId` handling for `cron.runs` (`259d86335378`)
-- **oh-my-pi / pi**: no additional high-priority functional gaps in latest week window beyond already tracked ideas
-
-### Community/trend signals
-- Long-run coding users continue requesting **auto-resume after provider limit reset** rather than manual return/resume.
-- Industry automation guidance is converging on **workflow-as-markdown + mandatory human review** for high-impact actions.
-
-### New ideas added
-- `IDEA-20260225-ironclaw-openrouter-setup-preset`
-- `IDEA-20260225-openclaw-cron-jobid-hardening`
-- `IDEA-20260225-community-rate-limit-auto-resume`
-- `IDEA-20260225-community-guardrailed-agentic-workflows`
-
-## 2026-02-25 Follow-up Snapshot
-
-### Upstream repo deltas reviewed
-- **openclaw**: onboarding/auth flow expanded for secret-ref parity across built-in and custom providers (`66295a7a1489`)
-- **ironclaw**: fixed tool/channel name collisions with kind-aware extension lookup + stronger install validation (`e9f32eaebea2`)
-
-### Community/trend signals
-- Community reports now include a sharper failure mode than generic quota pauses: a **single session can remain permanently wedged** on rate-limit errors even after global reset windows.
-- Industry guidance is shifting toward **trace-level agent evaluation** with drift alerts and periodic HITL audits (not just final-output scoring).
-
-### New ideas added
-- `IDEA-20260225-openclaw-secrets-onboarding-parity`
-- `IDEA-20260225-ironclaw-kind-aware-extension-registry`
-- `IDEA-20260225-community-rate-limit-session-self-healing`
-- `IDEA-20260225-community-trace-driven-agent-evaluation`
-
-## 2026-02-25 Late Snapshot
-
-### Upstream repo deltas reviewed
-- **openclaw**: system prompt now explicitly directs schema-first config behavior (`config.schema` before config edits/questions) (`975c9f4b5457`)
-- **oh-my-pi**: changelog tooling hardening with shared categories + schema validation for entry/delete payloads (`80580edd5994`)
-
-### Community/trend signals
-- Long-running autonomous coding loops are converging on **episodic execution with git-verified handoffs** to avoid false progress and drift loops.
-- Security operators are increasingly treating always-on local agents as **high-privilege automation surfaces** that need explicit consent scopes and exposure guardrails.
-
-### New ideas added
-- `IDEA-20260225-openclaw-schema-first-config-ops`
-- `IDEA-20260225-oh-my-pi-changelog-schema-hardening`
-- `IDEA-20260225-community-episodic-git-verified-handoffs`
-- `IDEA-20260225-community-autonomous-agent-consent-scopes`
+### Strategic confirmations
+1. **Skill auto-discovery**: Lemon's approach is validated - Pi just added this as a new feature, Lemon already had it
+2. **Production readiness**: Major industry gap identified - opportunity for Lemon to differentiate on reliability
+3. **Mistral support**: Worth evaluating for EU market and cost-sensitive use cases
+4. **Routine/Job scheduling**: IronClaw's FullJob pattern could enhance Lemon's cron/automation capabilities
 
 ## 2026-02-28 Research Snapshot
 
@@ -91,3 +49,71 @@ All upstream deltas from Feb 22-23 have been previously captured. No new idea ar
 2. **WASM sandbox enhancements** align with Microsoft/NVIDIA industry direction
 3. **Discord adapter** would capture OpenClaw-style community use cases
 4. **Local/offline deployment** patterns need continued investment
+
+## 2026-02-25 Late Snapshot
+
+### Upstream repo deltas reviewed
+- **openclaw**: system prompt now explicitly directs schema-first config behavior (`config.schema` before config edits/questions) (`975c9f4b5457`)
+- **oh-my-pi**: changelog tooling hardening with shared categories + schema validation for entry/delete payloads (`80580edd5994`)
+
+### Community/trend signals
+- Long-running autonomous coding loops are converging on **episodic execution with git-verified handoffs** to avoid false progress and drift loops.
+- Security operators are increasingly treating always-on local agents as **high-privilege automation surfaces** that need explicit consent scopes and exposure guardrails.
+
+### New ideas added
+- `IDEA-20260225-openclaw-schema-first-config-ops`
+- `IDEA-20260225-oh-my-pi-changelog-schema-hardening`
+- `IDEA-20260225-community-episodic-git-verified-handoffs`
+- `IDEA-20260225-community-autonomous-agent-consent-scopes`
+
+## 2026-02-25 Follow-up Snapshot
+
+### Upstream repo deltas reviewed
+- **openclaw**: onboarding/auth flow expanded for secret-ref parity across built-in and custom providers (`66295a7a1489`)
+- **ironclaw**: fixed tool/channel name collisions with kind-aware extension lookup + stronger install validation (`e9f32eaebea2`)
+
+### Community/trend signals
+- Community reports now include a sharper failure mode than generic quota pauses: a **single session can remain permanently wedged** on rate-limit errors even after global reset windows.
+- Industry guidance is shifting toward **trace-level agent evaluation** with drift alerts and periodic HITL audits (not just final-output scoring).
+
+### New ideas added
+- `IDEA-20260225-openclaw-secrets-onboarding-parity`
+- `IDEA-20260225-ironclaw-kind-aware-extension-registry`
+- `IDEA-20260225-community-rate-limit-session-self-healing`
+- `IDEA-20260225-community-trace-driven-agent-evaluation`
+
+## 2026-02-25 Research Snapshot
+
+### Upstream repo deltas reviewed
+- **ironclaw**: setup wizard now includes an OpenRouter preset with provider-specific labeling and prefilled base URL (`62dc5d046e28`)
+- **openclaw**: cron path/schema hardening around `jobId` handling for `cron.runs` (`259d86335378`)
+- **oh-my-pi / pi**: no additional high-priority functional gaps in latest week window beyond already tracked ideas
+
+### Community/trend signals
+- Long-run coding users continue requesting **auto-resume after provider limit reset** rather than manual return/resume.
+- Industry automation guidance is converging on **workflow-as-markdown + mandatory human review** for high-impact actions.
+
+### New ideas added
+- `IDEA-20260225-ironclaw-openrouter-setup-preset`
+- `IDEA-20260225-openclaw-cron-jobid-hardening`
+- `IDEA-20260225-community-rate-limit-auto-resume`
+- `IDEA-20260225-community-guardrailed-agentic-workflows`
+
+## 2026-02-24 Research Snapshot
+
+### Upstream repo deltas reviewed
+- **oh-my-pi**: model picker role badge improvements (`1648b2ad0e42`)
+- **openclaw**: env-backed secret refs + plaintext avoidance for auth persistence (`18546f31e61f`, `121f204828cb`)
+- **ironclaw**: native Signal channel adapter via `signal-cli` HTTP daemon (`b0b3a50fa38d`)
+- **pi**: streaming + resolver updates reviewed; no net-new high-priority gap beyond already-tracked items
+
+### Community/trend signals
+- OpenClaw usage narratives continue emphasizing multi-channel reach and local-first control.
+- Azure/Microsoft architecture content reinforces multi-agent pattern maturity.
+- Community feedback highlights quota/limit interruptions during long coding sessions.
+
+### New ideas added
+- `IDEA-20260224-openclaw-env-backed-secret-refs`
+- `IDEA-20260224-ironclaw-signal-channel-adapter`
+- `IDEA-20260224-oh-my-pi-model-role-badge`
+- `IDEA-20260224-community-quota-aware-agent-runs`
