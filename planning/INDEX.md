@@ -32,7 +32,7 @@ These entries were already completed before the `planning/` workflow was created
 
 | Plan ID | Title | Status | Owner | Workspace | Change ID | Roadmap Ref | Updated |
 |---|---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — | — |
+| [PLN-20260302-secrets-store-preferred-path](plans/PLN-20260302-secrets-store-preferred-path.md) | Encrypted Secrets Store as Preferred Path | in_progress | janitor | feature/pln-20260302-secrets-store-preferred-path | pending | ROADMAP.md | 2026-03-02 |
 
 ## Ready for Review
 
