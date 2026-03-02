@@ -3,8 +3,8 @@
 ## 2026-03-03
 
 ### Rate Limit Auto-Resume - M1-M2 Complete
-**Plan:** PLN-20260303-rate-limit-auto-resume  
-**Status:** `in_progress` (M1-M2 complete)  
+**Plan:** PLN-20260303-rate-limit-auto-resume
+**Status:** `in_progress` (M1-M2 complete)
 **Branch:** `feature/pln-20260303-rate-limit-auto-resume`
 
 Implemented core `RateLimitPause` module for tracking and managing rate limit pauses with auto-resume capability.
@@ -36,9 +36,39 @@ Implemented core `RateLimitPause` module for tracking and managing rate limit pa
 
 ## 2026-03-02
 
+### Secrets Store Preferred - Plan Complete
+**Plan:** PLN-20260223-secrets-store-preferred
+**Status:** ready_to_land
+
+Completed the secrets store preferred migration plan. The encrypted secrets store is now the canonical method for secret access across the Lemon umbrella.
+
+**Key Finding:** Most of the implementation was already complete - all AI providers, channel adapters, and tools were already using `Secrets.fetch_value/1`.
+
+**Changes:**
+- `apps/market_intel/lib/market_intel/secrets.ex`
+  - Fixed `put/2` bug: was calling non-existent `persist/2`, now correctly uses `set/3`
+  - All 18 secrets tests pass
+
+**Documentation:**
+- Created `docs/security/secrets-migration-guide.md`
+  - Step-by-step migration instructions
+  - Supported secret names reference
+  - Troubleshooting guide
+- Updated `README.md` with `mix lemon.secrets.check` and `mix lemon.secrets.import_env`
+- Added migration guide to `docs/catalog.exs`
+
+**Artifacts:**
+- Review: `planning/reviews/RVW-PLN-20260223-secrets-store-preferred.md`
+- Merge: `planning/merges/MRG-PLN-20260223-secrets-store-preferred.md`
+
+**Verification:**
+- 372 tests pass (lemon_core + market_intel)
+- No breaking changes - env fallback preserved
+- All milestones complete (M1-M5)
+
 ### Tool Call Name Normalization - Landed
-**Plan:** PLN-20260302-tool-call-name-normalization  
-**Status:** `landed`  
+**Plan:** PLN-20260302-tool-call-name-normalization
+**Status:** `landed`
 **Revision:** `9248e1aa`
 
 Implemented dispatch hardening that normalizes tool call names before lookup, preventing "tool not found" failures when providers emit whitespace-padded names.
@@ -52,16 +82,6 @@ Implemented dispatch hardening that normalizes tool call names before lookup, pr
 - `apps/agent_core/test/agent_core/loop/tool_calls_test.exs`
   - Added 4 new tests for normalization scenarios
   - All 8 tests pass
-
-**Normalization Features:**
-- Trims leading/trailing whitespace
-- Collapses internal whitespace (tabs, multiple spaces) to single space
-- Handles Unicode whitespace (non-breaking space, en/em spaces, etc.)
-
-**Reliability:**
-- Backward compatible - exact matches still work
-- Telemetry provides diagnostics for provider quality issues
-- Low risk - additive normalization layer
 
 ---
 

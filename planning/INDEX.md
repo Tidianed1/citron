@@ -141,6 +141,10 @@ Research findings from upstream projects (oh-my-pi, pi, openclaw, ironclaw, nano
 | [IDEA-20260227-pi-offline-startup-network-timeouts](ideas/IDEA-20260227-pi-offline-startup-network-timeouts.md) | Offline-First Startup Mode with Explicit Network Timeout Budget | pi | `proposed` | M | H | **Proceed** - Improve degraded-mode startup reliability for self-hosted operators |
 | [IDEA-20260227-community-channel-onboarding-plugin-diagnostics](ideas/IDEA-20260227-community-channel-onboarding-plugin-diagnostics.md) | Channel Onboarding Plugin Diagnostics and Guided Recovery | community | `proposed` | M | H | **Proceed** - Reduce first-run setup failures with actionable remediation |
 | [IDEA-20260227-industry-airgapped-agent-profile](ideas/IDEA-20260227-industry-airgapped-agent-profile.md) | Air-Gapped/Offline Deployment Profile for Self-Hosted Agents | industry | `proposed` | L | H | **Investigate** - Package offline profile and readiness diagnostics for enterprise/self-hosted use |
+| [IDEA-20260302-ironclaw-fulljob-routine-mode](ideas/IDEA-20260302-ironclaw-fulljob-routine-mode.md) | FullJob Routine Mode with Scheduler Dispatch | ironclaw | `proposed` | M | H | **Investigate** - Scheduled job execution and channel-first prompts |
+| [IDEA-20260302-pi-skill-auto-discovery](ideas/IDEA-20260302-pi-skill-auto-discovery.md) | Auto-Discover Skills in .agents Paths by Default | pi | `completed` | S | H | **Already implemented** - Lemon has skill auto-discovery parity |
+| [IDEA-20260302-openclaw-mistral-provider-support](ideas/IDEA-20260302-openclaw-mistral-provider-support.md) | Full Mistral AI Provider Support | openclaw | `proposed` | M | M | **Investigate** - Add Mistral as a provider option |
+| [IDEA-20260302-community-ai-agent-production-readiness](ideas/IDEA-20260302-community-ai-agent-production-readiness.md) | AI Agent Production Readiness - Context Windows & Operational Awareness | community | `proposed` | L | H | **Proceed** - Address production deployment blockers |
 
 ### Summary
 
@@ -205,6 +209,25 @@ New findings from community research:
 - New upstream startup-resilience signal from Pi: explicit offline startup mode + bounded network timeout handling to avoid boot hangs in degraded environments (`757d36a41b96`).
 - New community onboarding friction signal (OpenClaw issue #24781): users can complete channel credential entry yet still fail at generic "plugin not available" errors without guided remediation.
 - New industry deployment signal: self-hosted agent adoption is increasingly tied to offline/air-gapped operational posture and deterministic bootstrap expectations (Cloudflare Moltworker narrative + adjacent ecosystem guidance).
+
+### Research Addendum (2026-03-02)
+
+New upstream deltas captured from inspiration research:
+- **IronClaw v0.11.0**: FullJob routine mode with scheduler dispatch (commit 04d3b00) - scheduled job execution pattern
+- **IronClaw v0.11.0**: Hot-activate WASM channels with channel-first prompts (commit ea57447) - dynamic channel activation
+- **Pi v0.54.0**: Auto-discover skills in .agents paths by default (commit 39cbf47e) - **Lemon already has parity**
+- **OpenClaw**: Full Mistral AI provider support (commit d92ba4f8a) - adds Mistral as first-class provider
+
+New community/industry signals captured:
+- **Production readiness gap**: Industry analysis shows AI agents lack context window awareness, operational awareness (OS/environment), and produce "agentic slop"
+- **Multi-agent orchestration**: OpenAI Agents SDK and community converging on structured output-based orchestration patterns
+- **OpenClaw vs Claude Code**: Community views OpenClaw as "Swiss Army knife" vs Claude Code "surgical scalpel" - different use cases
+
+**New Idea Artifacts Created:**
+1. `IDEA-20260302-ironclaw-fulljob-routine-mode.md` - Scheduled job execution patterns
+2. `IDEA-20260302-pi-skill-auto-discovery.md` - Skill discovery parity confirmation
+3. `IDEA-20260302-openclaw-mistral-provider-support.md` - Mistral provider evaluation
+4. `IDEA-20260302-community-ai-agent-production-readiness.md` - Production readiness improvements
 
 ## Templates
 

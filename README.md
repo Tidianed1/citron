@@ -2089,6 +2089,12 @@ mix lemon.secrets.list
 # Check status (key source + count)
 mix lemon.secrets.status
 
+# Check which secrets resolve from store vs env
+mix lemon.secrets.check
+
+# Import all env vars into encrypted store
+mix lemon.secrets.import_env
+
 # Delete
 mix lemon.secrets.delete llm_openai_api_key
 ```
@@ -2098,6 +2104,8 @@ Optional metadata on set:
 ```bash
 mix lemon.secrets.set github_api_token "ghp_..." --provider github --expires-at 1735689600000
 ```
+
+**Migrating from environment variables?** See [`docs/security/secrets-migration-guide.md`](docs/security/secrets-migration-guide.md) for a step-by-step guide.
 
 #### 3) Provider onboarding
 

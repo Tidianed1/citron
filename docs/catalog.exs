@@ -144,6 +144,12 @@
     max_age_days: 90
   },
   %{
+    path: "docs/security/secrets-migration-guide.md",
+    owner: "@z80",
+    last_reviewed: ~D[2026-03-02],
+    max_age_days: 90
+  },
+  %{
     path: "docs/agent-loop/README.md",
     owner: "@z80",
     last_reviewed: ~D[2026-02-27],
