@@ -38,13 +38,13 @@ These entries were already completed before the `planning/` workflow was created
 
 | Plan ID | Title | Review Doc | Owner | Updated |
 |---|---|---|---|---|
-| — | — | — | — | — |
+| — | — | — | — | — | — |
 
 ## Ready to Land
 
 | Plan ID | Title | Landing Doc | Owner | Updated |
 |---|---|---|---|---|
-| — | — | — | — | — |
+| [PLN-20260302-tool-call-name-normalization](plans/PLN-20260302-tool-call-name-normalization.md) | Tool Call Name Normalization | [MRG-PLN-20260302-tool-call-name-normalization](merges/MRG-PLN-20260302-tool-call-name-normalization.md) | janitor | 2026-03-02 |
 
 
 ## Blocked
