@@ -1,51 +1,28 @@
 ---
 plan_id: PLN-20260302-tool-call-name-normalization
-branch: feature/pln-20260302-tool-call-name-normalization
-target: main
-review_doc: planning/reviews/RVW-PLN-20260302-tool-call-name-normalization.md
+merged_at: 2026-03-02
+merged_by: janitor
+branch: feature/pln-20260302-tool-call-normalization
+commit: 6f3d3ace
 ---
 
-# Merge: Tool Call Name Normalization
+# Merge Summary
 
-## Landing Commands
+## Changes
+- Modified `apps/agent_core/lib/agent_core/loop/tool_calls.ex` - Added name normalization in `find_tool/2`
+- Modified `apps/coding_agent/lib/coding_agent/tool_registry.ex` - Added name normalization in `get_tool/3`
+- Modified `apps/coding_agent/test/coding_agent/tool_registry_test.exs` - Added 5 new tests
 
-```bash
-cd ~/dev/lemon
-git checkout main
-git pull origin main
-git merge --no-ff feature/pln-20260302-tool-call-name-normalization -m "feat: tool call name normalization for provider formatting drift
+## Test Results
+- 33 ToolRegistry tests pass
+- 4 ToolCalls tests pass
+- All existing tests continue to pass
 
-Implements dispatch hardening that normalizes tool call names before lookup,
-preventing 'tool not found' failures when providers emit whitespace-padded names.
+## Telemetry Events Added
+- `[:agent_core, :tool_call, :name_normalized]` - Emitted when tool name is normalized in agent_core
+- `[:coding_agent, :tool_call, :name_normalized]` - Emitted when tool name is normalized in coding_agent
 
-- Add normalize_tool_name/1 with Unicode whitespace support
-- Update find_tool/2 to use normalized matching
-- Emit telemetry when normalization occurs for diagnostics
-- Add comprehensive tests for edge cases
-
-Closes: IDEA-20260227-openclaw-tool-call-name-normalization"
-git push origin main
-```
-
-## Pre-Landing Checklist
-
-- [x] All tests pass (`mix test apps/agent_core/test/agent_core/loop/tool_calls_test.exs`)
-- [x] Review completed (see RVW-PLN-20260302-tool-call-name-normalization.md)
-- [x] Code follows project conventions
-- [x] No breaking changes
-- [x] Documentation updated (inline docs)
-
-## Post-Landing
-
-- [ ] Update plan status to `landed`
-- [ ] Update INDEX.md
-- [ ] Update JANITOR.md with summary
-
-## Files Changed
-
-- `apps/agent_core/lib/agent_core/loop/tool_calls.ex` - Normalization logic
-- `apps/agent_core/test/agent_core/loop/tool_calls_test.exs` - Tests
-- `planning/plans/PLN-20260302-tool-call-name-normalization.md` - Plan
-- `planning/INDEX.md` - Added active plan entry
-- `planning/reviews/RVW-PLN-20260302-tool-call-name-normalization.md` - Review
-- `planning/merges/MRG-PLN-20260302-tool-call-name-normalization.md` - This file
+## Implementation Notes
+- Uses `String.trim/1` for normalization (handles spaces, tabs, newlines)
+- Only emits telemetry when normalization actually changes the name
+- No breaking changes - existing behavior preserved for normal names

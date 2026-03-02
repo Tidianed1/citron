@@ -1,3 +1,43 @@
+### 2026-03-02 - Tool Call Name Normalization
+**Work Area**: Reliability Hardening / Tool Dispatch
+
+**Summary**:
+Implemented dispatch hardening that trims/normalizes tool call names before lookup, preventing avoidable "tool not found" failures when providers emit whitespace-padded names.
+
+**Changes Made**:
+1. **AgentCore.Loop.ToolCalls** (`apps/agent_core/lib/agent_core/loop/tool_calls.ex`):
+   - Modified `find_tool/2` to normalize tool names using `String.trim/1`
+   - Added telemetry event `[:agent_core, :tool_call, :name_normalized]` when normalization occurs
+   - Only emits telemetry when name actually changes (not for already-normal names)
+
+2. **CodingAgent.ToolRegistry** (`apps/coding_agent/lib/coding_agent/tool_registry.ex`):
+   - Modified `get_tool/3` to normalize tool names using `String.trim/1`
+   - Added telemetry event `[:coding_agent, :tool_call, :name_normalized]` when normalization occurs
+   - Defense in depth: both dispatch paths now normalize
+
+3. **Tests** (`apps/coding_agent/test/coding_agent/tool_registry_test.exs`):
+   - Added 5 new tests for normalization behavior
+   - Tests whitespace padding (spaces, tabs, newlines)
+   - Tests telemetry emission on normalization
+   - Tests no telemetry for already-normal names
+
+**Telemetry Events**:
+- `[:agent_core, :tool_call, :name_normalized]` - metadata: `%{original: string, normalized: string}`
+- `[:coding_agent, :tool_call, :name_normalized]` - metadata: `%{original: string, normalized: string}`
+
+**Test Results**:
+- ToolRegistry tests: 33 tests, 0 failures
+- ToolCalls tests: 4 tests, 0 failures
+- All existing tests continue to pass
+
+**Commits**:
+- `6f3d3ace` - feat: normalize whitespace-padded tool call names before dispatch
+- `7bec96ae` - docs: update planning artifacts for PLN-20260302-tool-call-name-normalization
+
+**Source**: [IDEA-20260227-openclaw-tool-call-name-normalization](planning/ideas/IDEA-20260227-openclaw-tool-call-name-normalization.md)
+
+---
+
 ### 2026-03-01 - MCP Tool Integration Implementation
 **Work Area**: MCP Protocol / Tool Registry / Skills Integration
 

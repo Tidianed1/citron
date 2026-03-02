@@ -57,6 +57,7 @@ These entries were already completed before the `planning/` workflow was created
 
 | Plan ID | Title | Landed Revision | Notes | Updated |
 |---|---|---|---|---|
+| [PLN-20260302-tool-call-name-normalization](plans/PLN-20260302-tool-call-name-normalization.md) | Normalize Whitespace-Padded Tool Call Names | `6f3d3ace` | Tool name normalization + telemetry in agent_core and coding_agent | 2026-03-02 |
 | [PLN-20260301-mcp-tool-integration](plans/PLN-20260301-mcp-tool-integration.md) | MCP Tool Integration | `d29fd4b7` | MCP client/server, tool registry integration, 54+ tests | 2026-03-01 |
 | [PLN-20260226-agent-games-platform](plans/PLN-20260226-agent-games-platform.md) | Agent-vs-Agent Game Platform (REST API + Live Spectator Web) | `61e6c71e` | Merged with TicTacToe addition; 71 tests pass | 2026-03-01 |
 | [PLN-20260224-long-running-agent-harnesses](plans/PLN-20260224-long-running-agent-harnesses.md) | Long-Running Agent Harnesses and Task Management | `75f434c7` | Idle watchdog, keepalive, checkpointing, progress tracking | 2026-02-28 |
