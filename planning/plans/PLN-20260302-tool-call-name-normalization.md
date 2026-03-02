@@ -1,11 +1,13 @@
 ---
 id: PLN-20260302-tool-call-name-normalization
 title: Tool Call Name Normalization for Provider Formatting Drift
-status: ready_to_land
+status: landed
 owner: janitor
 reviewer: janitor
 branch: feature/pln-20260302-tool-call-name-normalization
 created: 2026-03-02
+landed_at: 2026-03-02
+landed_revision: 9248e1aa
 ---
 
 # Tool Call Name Normalization for Provider Formatting Drift

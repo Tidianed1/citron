@@ -1,5 +1,37 @@
 # JANITOR.md - Implementation Agent Work Log
 
+## 2026-03-02
+
+### Tool Call Name Normalization - Landed
+**Plan:** PLN-20260302-tool-call-name-normalization  
+**Status:** `landed`  
+**Revision:** `9248e1aa`
+
+Implemented dispatch hardening that normalizes tool call names before lookup, preventing "tool not found" failures when providers emit whitespace-padded names.
+
+**Changes:**
+- `apps/agent_core/lib/agent_core/loop/tool_calls.ex`
+  - Added `normalize_tool_name/1` with Unicode whitespace support
+  - Updated `find_tool/2` to use normalized matching
+  - Added telemetry emission `[:agent_core, :tool_call, :name_normalized]`
+
+- `apps/agent_core/test/agent_core/loop/tool_calls_test.exs`
+  - Added 4 new tests for normalization scenarios
+  - All 8 tests pass
+
+**Normalization Features:**
+- Trims leading/trailing whitespace
+- Collapses internal whitespace (tabs, multiple spaces) to single space
+- Handles Unicode whitespace (non-breaking space, en/em spaces, etc.)
+
+**Reliability:**
+- Backward compatible - exact matches still work
+- Telemetry provides diagnostics for provider quality issues
+- Low risk - additive normalization layer
+
+---
+
+
 ## 2026-02-24
 
 ### Completed Work

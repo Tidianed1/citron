@@ -44,7 +44,7 @@ These entries were already completed before the `planning/` workflow was created
 
 | Plan ID | Title | Landing Doc | Owner | Updated |
 |---|---|---|---|---|
-| [PLN-20260302-tool-call-name-normalization](plans/PLN-20260302-tool-call-name-normalization.md) | Tool Call Name Normalization | [MRG-PLN-20260302-tool-call-name-normalization](merges/MRG-PLN-20260302-tool-call-name-normalization.md) | janitor | 2026-03-02 |
+| — | — | — | — | — |
 
 
 ## Blocked
@@ -82,6 +82,7 @@ These entries were already completed before the `planning/` workflow was created
 | [PLN-20260223-pi-oh-my-pi-sync](plans/PLN-20260223-pi-oh-my-pi-sync.md) | Pi/Oh-My-Pi Upstream Sync - Models and Tools | `bb34c752` | Upstream parity confirmed; sync plan landed with no additional code deltas | 2026-02-23 |
 | [PLN-20260223-lemon-quality-unblock](plans/PLN-20260223-lemon-quality-unblock.md) | Unblock `mix lemon.quality` | — | Dedupe test modules, TextGeneration bridge, CI quality guard | 2026-02-23 |
 | [PLN-20260223-ai-test-expansion](plans/PLN-20260223-ai-test-expansion.md) | AI app test expansion | `ce421ec8` | 155 tests across Models, Anthropic, Google, Bedrock | 2026-02-23 |
+| [PLN-20260302-tool-call-name-normalization](plans/PLN-20260302-tool-call-name-normalization.md) | Tool Call Name Normalization | `9248e1aa` | Unicode whitespace normalization, telemetry, 4 new tests | 2026-03-02 |
 
 ## Templates
 
