@@ -1,11 +1,13 @@
 ---
 id: PLN-20250308-auto-compact-context-retry
 title: Auto-Compact and Retry on ContextLengthExceeded
-status: in_progress
+status: landed
 owner: janitor
 workspace: feature/pln-20250308-auto-compact-context-retry
-change_id: pending
+change_id: 84741ff3
 created: 2026-03-08
+landed: 2026-03-08
+merge_artifact: planning/merges/MRG-PLN-20250308-auto-compact-context-retry.md
 ---
 
 # Auto-Compact and Retry on ContextLengthExceeded

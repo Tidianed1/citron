@@ -32,7 +32,7 @@ These entries were already completed before the `planning/` workflow was created
 
 | Plan ID | Title | Status | Owner | Workspace | Change ID | Roadmap Ref | Updated |
 |---|---|---|---|---|---|---|---|
-| [PLN-20250308-auto-compact-context-retry](plans/PLN-20250308-auto-compact-context-retry.md) | Auto-Compact and Retry on ContextLengthExceeded | ready_to_land | janitor | feature/pln-20250308-auto-compact-context-retry | pending | - | 2026-03-08 |
+| — | — | — | — | — | — | — | — |
 
 ## Ready for Review
 
@@ -56,6 +56,7 @@ These entries were already completed before the `planning/` workflow was created
 
 | Plan ID | Title | Landed Revision | Notes | Updated |
 |---|---|---|---|---|
+| [PLN-20250308-auto-compact-context-retry](plans/PLN-20250308-auto-compact-context-retry.md) | Auto-Compact and Retry on ContextLengthExceeded | `84741ff3` | Context limit error detection, ContextCompactor strategies, CompactingClient retry, 18 tests | 2026-03-08 |
 | [PLN-20260303-rate-limit-auto-resume](plans/PLN-20260303-rate-limit-auto-resume.md) | Auto-Resume Runs After Rate-Limit Reset | `62833edb` | Rate limit pause tracking, ResumeScheduler, RunGraph integration, 69 tests | 2026-03-06 |
 | [PLN-20260302-secrets-store-preferred-path](plans/PLN-20260302-secrets-store-preferred-path.md) | Encrypted Secrets Store as Preferred Path | `b49c9c72` | Core resolution enhancement, provider config integration, migration tooling | 2026-03-06 |
 | [PLN-20260223-secrets-store-preferred](plans/PLN-20260223-secrets-store-preferred.md) | Encrypted Secrets Store as Preferred Secret Access Path | `cdd51b12` | Store-first resolution for AI providers, channels, skills; import/check tasks | 2026-03-06 |
