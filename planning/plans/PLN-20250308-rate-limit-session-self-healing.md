@@ -1,7 +1,7 @@
 ---
 id: PLN-20250308-rate-limit-session-self-healing
 title: Self-Healing Sessions for Persistent Rate-Limit Wedges
-status: planned
+status: in_progress
 owner: janitor
 workspace: feature/pln-20250308-rate-limit-session-self-healing
 change_id: pending
@@ -46,13 +46,13 @@ When a session hits rate limits:
 
 ## Success Criteria
 
-- [ ] Wedged sessions automatically detect when limits clear
-- [ ] Probe requests don't exacerbate rate limit issues
-- [ ] Fallback model/provider selection works
-- [ ] Session fork preserves critical context
-- [ ] Telemetry events for observability
-- [ ] Tests cover healing scenarios
-- [ ] No regression in existing rate limit handling
+- [x] Wedged sessions automatically detect when limits clear
+- [x] Probe requests don't exacerbate rate limit issues
+- [x] Fallback model/provider selection works
+- [x] Session fork preserves critical context
+- [x] Telemetry events for observability
+- [x] Tests cover healing scenarios
+- [x] No regression in existing rate limit handling (config tests pass)
 
 ## Implementation Plan
 
@@ -90,6 +90,19 @@ When a session hits rate limits:
 | Timestamp | Who | What | Result | Links |
 |-----------|-----|------|--------|-------|
 | 2026-03-08 | janitor | Created plan from IDEA-20260225-community-rate-limit-session-self-healing | Plan created | - |
+| 2026-03-08 | z80 | M1: Implemented RateLimitHealer module with probe logic | Complete | `apps/coding_agent/lib/coding_agent/rate_limit_healer.ex` |
+| 2026-03-08 | z80 | M1: Added exponential backoff with jitter for probes | Complete | Tests pass |
+| 2026-03-08 | z80 | M1: Added session health check function | Complete | `health_check/1` in Session module |
+| 2026-03-08 | z80 | M1: Created telemetry events for probe attempts | Complete | 7 telemetry events implemented |
+| 2026-03-08 | z80 | M2: Implemented backoff reset strategy | Complete | `RateLimitRecovery.apply_strategy/2` |
+| 2026-03-08 | z80 | M2: Added fallback model/provider selection | Complete | `find_fallback_model/2`, `try_fallback_provider/2` |
+| 2026-03-08 | z80 | M2: Implemented strategy selection logic | Complete | `select_strategy/1` with failure-based progression |
+| 2026-03-08 | z80 | M3: Created session fork with context carryover | Complete | `SessionFork.fork_session/2` |
+| 2026-03-08 | z80 | M3: Added fork notification for users | Complete | `build_fork_message/3`, `fork_notification/1` |
+| 2026-03-08 | z80 | M3: Added original session cleanup | Complete | `terminate_original_session/2` |
+| 2026-03-08 | z80 | M4: Added configuration for healing behavior | Complete | `Config.rate_limit_healing_config/0` |
+| 2026-03-08 | z80 | M4: Added RateLimitHealerRegistry to supervision tree | Complete | Updated `application.ex` |
+| 2026-03-08 | z80 | All tests pass | Complete | 21 tests in recovery/fork modules |
 
 ## Related
 

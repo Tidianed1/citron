@@ -677,6 +677,7 @@ defmodule LemonChannels.Capabilities do
       |> maybe_add(legacy[:reaction_support], :reactions)
       |> maybe_add(legacy[:voice_support], :voice)
       |> maybe_add(legacy[:file_support], :attachments)
+      |> maybe_add(legacy[:rich_blocks], :rich_blocks)
 
     specs =
       if legacy[:image_support] do

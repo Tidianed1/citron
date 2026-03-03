@@ -99,6 +99,76 @@ defmodule LemonChannels.Registry do
     end
   end
 
+  @doc """
+  Get plugin capabilities in the new format.
+
+  Returns a `LemonChannels.Capabilities` struct or nil if plugin not found.
+  """
+  @spec get_capabilities_new(binary()) :: LemonChannels.Capabilities.t() | nil
+  def get_capabilities_new(plugin_id) do
+    case get_capabilities(plugin_id) do
+      nil -> nil
+      caps when is_map(caps) -> LemonChannels.Capabilities.from_legacy(caps)
+    end
+  end
+
+  @doc """
+  Query if a plugin supports a specific capability.
+
+  ## Examples
+
+      Registry.supports?("telegram", :attachments)
+      # => true
+
+      Registry.supports?("xmtp", :rich_blocks)
+      # => false
+  """
+  @spec supports?(binary(), atom()) :: boolean()
+  def supports?(plugin_id, capability_type) do
+    case get_capabilities_new(plugin_id) do
+      nil -> false
+      caps -> LemonChannels.Capabilities.supports?(caps, capability_type)
+    end
+  end
+
+  @doc """
+  Query if a plugin supports a specific feature within a capability.
+
+  ## Examples
+
+      Registry.supports_feature?("telegram", :rich_blocks, :markdown)
+      # => true
+
+      Registry.supports_feature?("discord", :rich_blocks, :buttons)
+      # => false
+  """
+  @spec supports_feature?(binary(), atom(), atom()) :: boolean()
+  def supports_feature?(plugin_id, capability_type, feature) do
+    case get_capabilities_new(plugin_id) do
+      nil -> false
+      caps -> LemonChannels.Capabilities.supports_feature?(caps, capability_type, feature)
+    end
+  end
+
+  @doc """
+  Validates a capability request for a plugin.
+
+  ## Examples
+
+      Registry.validate("telegram", :attachments, %{size: 5_000_000, mime_type: "image/png"})
+      # => :ok
+
+      Registry.validate("xmtp", :attachments, %{size: 1_000})
+      # => {:error, :capability_not_supported}
+  """
+  @spec validate(binary(), atom(), map()) :: :ok | {:error, term()}
+  def validate(plugin_id, capability_type, params) do
+    case get_capabilities_new(plugin_id) do
+      nil -> {:error, :plugin_not_found}
+      caps -> LemonChannels.Capabilities.validate(caps, capability_type, params)
+    end
+  end
+
   @impl true
   def init(_opts) do
     {:ok, %{plugins: %{}}}
