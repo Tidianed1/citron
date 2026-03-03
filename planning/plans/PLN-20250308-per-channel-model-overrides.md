@@ -1,7 +1,7 @@
 ---
 id: PLN-20250308-per-channel-model-overrides
 title: Persistent Per-Channel Model Overrides
-status: planned
+status: in_progress
 owner: janitor
 workspace: feature/pln-20250308-per-channel-model-overrides
 change_id: pending
@@ -51,13 +51,13 @@ Community operators need:
 
 ## Success Criteria
 
-- [ ] Route model policy schema defined
-- [ ] Policy storage with persistence
-- [ ] Precedence rules implemented
-- [ ] Management API for policies
-- [ ] Telegram pattern migrated
+- [x] Route model policy schema defined
+- [x] Policy storage with persistence
+- [x] Precedence rules implemented
+- [ ] Management API for policies (Mix tasks)
+- [x] Telegram migration module created
 - [ ] All adapters support route-level policies
-- [ ] Tests for policy resolution
+- [x] Tests for policy resolution (48 tests)
 - [ ] Documentation for operators
 
 ## Implementation Plan
@@ -96,6 +96,9 @@ Community operators need:
 | Timestamp | Who | What | Result | Links |
 |-----------|-----|------|--------|-------|
 | 2026-03-08 | janitor | Created plan from IDEA-20260227-community-per-channel-model-overrides | Plan created | - |
+| 2026-03-02 | implementation-agent | M1: Implemented ModelPolicy schema, Route module, storage | 48 tests passing | `apps/lemon_core/lib/lemon_core/model_policy.ex` |
+| 2026-03-02 | implementation-agent | M2: Implemented precedence-based resolution | Tests passing | `LemonCore.ModelPolicy.resolve/1` |
+| 2026-03-02 | implementation-agent | M4: Created Telegram migration module | Migration utilities ready | `LemonCore.ModelPolicy.Migration` |
 
 ## Related
 
