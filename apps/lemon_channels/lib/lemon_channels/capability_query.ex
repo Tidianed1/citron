@@ -223,7 +223,17 @@ defmodule LemonChannels.CapabilityQuery do
   def all do
     Registry.list()
     |> Enum.map(fn {channel_id, info} ->
-      caps = info[:capabilities_v2] || %{}
+      # Get capabilities from registry and convert from legacy format if needed
+      caps =
+        case info[:capabilities_v2] do
+          nil ->
+            # Fall back to legacy capabilities and convert
+            legacy = info[:capabilities] || %{}
+            Capabilities.from_legacy(legacy)
+
+          caps_v2 ->
+            caps_v2
+        end
 
       %{
         channel_id: channel_id,

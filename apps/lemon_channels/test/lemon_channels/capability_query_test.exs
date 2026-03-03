@@ -21,7 +21,8 @@ defmodule LemonChannels.CapabilityQueryTest do
           image_support: true,
           file_support: true,
           reaction_support: true,
-          thread_support: true
+          thread_support: true,
+          rich_blocks: true
         }
       }
     end
