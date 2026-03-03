@@ -32,7 +32,9 @@ These entries were already completed before the `planning/` workflow was created
 
 | Plan ID | Title | Status | Owner | Workspace | Change ID | Roadmap Ref | Updated |
 |---|---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — | — |
+| [PLN-20250308-rate-limit-session-self-healing](plans/PLN-20250308-rate-limit-session-self-healing.md) | Self-Healing Sessions for Persistent Rate-Limit Wedges | in_progress | janitor | feature/pln-20250308-rate-limit-session-self-healing | pending | - | 2026-03-08 |
+| [PLN-20250308-channel-capability-negotiation](plans/PLN-20250308-channel-capability-negotiation.md) | Channel Capability Negotiation (Attachments, Rich Blocks, Streaming) | in_progress | janitor | feature/pln-20250308-channel-capability-negotiation | pending | - | 2026-03-08 |
+| [PLN-20250308-per-channel-model-overrides](plans/PLN-20250308-per-channel-model-overrides.md) | Persistent Per-Channel Model Overrides | in_progress | janitor | feature/pln-20250308-per-channel-model-overrides | pending | - | 2026-03-08 |
 
 ## Ready for Review
 
